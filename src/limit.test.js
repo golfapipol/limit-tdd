@@ -8,6 +8,12 @@ describe('Limit', () => {
         expect(beginWithInclude(input)).toBe(true)
     })    
 
+    it('Begin With Exclude', () => {
+        expect(() => {
+            const input = "xabc,5]"
+            beginWithInclude(input)
+        }).toThrowError("invalid")
+    })
 
     it('Begin With Exclude', () => {
         const input = "(1,5]"
@@ -45,11 +51,27 @@ describe('Limit', () => {
         expect(getStart(input)).toBe(-1)   
     });
 
+    it('getStart abc invalid', () => {
+
+        expect(() => {
+            const input = "[abc,5]"
+            getStart(input)
+        }).toThrowError("invalid")
+    })    
+
     it('End With Include', () => {
         const input = "(1,5]"
 
         expect(endWithInclude(input)).toBe(true)
     })
+
+    it('End With Random', () => {
+        expect(() => {
+            const input = "[abc,5x"
+            endWithInclude(input)
+        }).toThrowError("invalid")
+    })
+
 
     it('End Include 5 Should Be 5', () => {
         const input = "[1,5]"

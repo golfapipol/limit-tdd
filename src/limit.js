@@ -3,23 +3,33 @@ const beginWithInclude = (input) => {
     if (input[0] == "(") {
         return false
     }
-    return true
+    if (input[0] == "[") {
+        return true
+    }
+    throw new Error("invalid")
 }
 
 const getStart = (input) => {
     let [start, end] = input.split(",")
     start = start.substring(1)
-    if (beginWithInclude(input)) {
-        return +start
+    let number = +start
+    if (Number.isNaN(number)) {
+        throw new Error("invalid")
     }
-    return +start + 1
+    if (beginWithInclude(input)) {
+        return number
+    }
+    return number + 1
 }
 
 const endWithInclude = (input) => {
     if (input[input.length-1] == ")") {
         return false
     }
-    return true
+    if (input[input.length-1] == "]") {
+        return true
+    }
+    throw new Error("invalid")
 }
 
 const getEnd = (input) => {
