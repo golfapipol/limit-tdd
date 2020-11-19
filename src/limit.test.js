@@ -33,6 +33,18 @@ describe('Limit', () => {
         expect(getStart(input)).toBe(11)     
     });
 
+    it('Begin Exclude -1 Should Be 0', () => {
+        const input = "(-1,5]"
+        
+        expect(getStart(input)).toBe(0)   
+    });
+
+    it('Begin Include -1 Should Be -1', () => {
+        const input = "[-1,5]"
+        
+        expect(getStart(input)).toBe(-1)   
+    });
+
     it('End With Include', () => {
         const input = "(1,5]"
 
